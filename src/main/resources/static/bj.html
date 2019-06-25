@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>北京市五险一金及税后工资计算器</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        // axios 配置
+
+        // axios.defaults.timeout = 5000;
+        //
+        // //axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+        //
+        // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
+        //
+        // // axios.defaults.headers.post['Content-Type'] = 'json';
+        //
+        // axios.defaults.baseURL = 'http://localhost/';
+
+    </script>
+    <style>
+        .el-header, .el-footer {
+            background-color: #409EFF;
+            color: #333;
+            text-align: center;
+            line-height: 60px;
+        }
+
+        .el-main {
+            /*background-color: #E9EEF3;
+            color: #333;
+            text-align: center;
+            width: 60%;
+            align-content: center;
+            line-height: 160px;*/
+            text-align: center;
+        }
+
+        /* body > .el-container {
+             margin-bottom: 400px;
+         }*/
+        .el-form {
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header>2019年北京市社保计算器（按起征点5000计算,专项附加扣除）</el-header>
+        <el-main>
+            <el-form :inline="true" :model="form" class="demo-form-inline" label-width="120px">
+                <el-form-item label="税前工资">
+                    <el-input v-model="form.user" placeholder="税前工资"></el-input>
+                </el-form-item>
+                <el-form-item label="公积金比例(%)">
+                    <el-input v-model="form.user" placeholder="公积金比例"></el-input>
+                </el-form-item>
+                <br/>
+                <el-form-item label="社保基数">
+                    <el-input v-model="form.user" placeholder="社保基数"></el-input>
+                </el-form-item>
+                <!--<el-checkbox v-model="checked"></el-checkbox>-->
+                <el-form-item label="公积金基数">
+                    <el-input v-model="form.user" placeholder="公积金基数"></el-input>
+                </el-form-item>
+                <br/>
+                <el-form-item label="参保类型">
+                    <el-select v-model="form.region" placeholder="请选择参保类型" label-width="100px">
+                        <el-option label="城镇户口" value="shanghai"></el-option>
+                        <el-option label="农业户口" value="beijing"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="专项附加扣除">
+                    <el-input v-model="form.user" placeholder="专项附加扣除"></el-input>
+                </el-form-item>
+                <br/>
+                <el-form-item label="缴纳补充公积金">
+                    <el-input v-model="form.user" placeholder="公积金基数"></el-input>
+                </el-form-item>
+                <br/>
+                <el-form-item>
+                    <el-button type="primary" @click="onSubmit">计&nbsp;&nbsp;&nbsp算</el-button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp
+                    <el-button>清&nbsp;&nbsp;&nbsp空</el-button>
+                </el-form-item>
+            </el-form>
+
+        </el-main>
+    </el-container>
+</div>
+<div id="app-5">
+    <p>{{ message1 }}</p>
+    <button v-on:click="reverseMessage">逆转消息</button>
+</div>
+
+<script>
+    var Main = {
+        data() {
+            return {
+                form: {
+                    name: '',
+                    region: '',
+                    date1: '',
+                    date2: '',
+                    delivery: false,
+                    type: [],
+                    resource: '',
+                    desc: ''
+                }
+            }
+        },
+        methods: {
+            onSubmit() {
+                console.log('submit!');
+            }
+        }
+    }
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#app')
+
+
+    var app5 = new Vue({
+        el: '#app-5',
+        data: {
+            message1: 'Hello Vue.js!'
+        },
+        methods: {
+            reverseMessage: function () {
+                let url = "/aut/user/list";
+                let data = {
+                    firstName: 'Fred',
+                    lastName: 'Flintstone'
+                }
+                axios.post(url, data).then(function (response) {
+                    console.log(response);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
